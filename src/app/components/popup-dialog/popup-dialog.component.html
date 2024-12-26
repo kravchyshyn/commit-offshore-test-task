@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>{{ data.volumeInfo.title || '' }}</h2>
+<mat-dialog-content>
+    <div class="container">
+        <div class="main-info-wrapper">
+            <div class="book-logo">
+                <img src="{{ data.volumeInfo.imageLinks.thumbnail }}" alt="">
+            </div>
+    
+            <div class="right-panel">
+                <div *ngIf="data?.volumeInfo?.authors?.length"><span>Author: </span> {{ data.volumeInfo.authors.join(' ') }}</div>
+                <div *ngIf="data?.volumeInfo?.categories?.length"><span>Category: </span>  {{ data.volumeInfo.categories.join(' ') }}</div>
+                <div *ngIf="data?.volumeInfo?.publishedDate"><span>Published Date: </span>  {{ data.volumeInfo.publishedDate }}</div>
+                <div *ngIf="data?.volumeInfo?.pageCount"><span>Page count: </span> {{ data.volumeInfo.pageCount }}</div>
+                <div *ngIf="data?.volumeInfo?.publisher"><span>Publisher: </span> {{ data.volumeInfo.publisher }}</div>
+                <div *ngIf="data?.volumeInfo?.language"><span>Language: </span> {{ data.volumeInfo.language.toUpperCase() }} </div>
+            </div>
+        </div>
+
+        <div *ngIf="data?.volumeInfo?.description" class="description">
+            <span>Description: </span> {{ data.volumeInfo.description }}
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
