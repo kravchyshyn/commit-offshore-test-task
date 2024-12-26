@@ -1,0 +1,49 @@
+
+  <mat-form-field class="input-wrapper">
+    <input 
+      matInput
+      placeholder="Please start typing book title..."
+      [formControl]="searchControl"
+      [matAutocomplete]="auto" 
+    />
+    @if (searchControl.value) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="clearScreen()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of suggestions" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="searchControl.touched && searchControl.invalid">Minimum 2 characters required</mat-error>
+  </mat-form-field>
+
+  <ng-container *ngIf="results$ | async as results;">
+    <cdk-virtual-scroll-viewport 
+    itemSize="50" 
+    class="result-list" 
+    (scroll)="onListScroll($event)"
+    *ngIf="searchControl.value"
+  >
+    <div 
+    *cdkVirtualFor="let bookData of results" class="result-item"
+    >
+    <div class="row" (click)="openDialog(bookData)">
+      <span class="book-title">{{ bookData?.volumeInfo?.title }}</span>
+      <span class="authors"> {{ bookData?.volumeInfo?.authors?.join(' , ') }} </span>
+    </div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+  <div class="no-results-container" *ngIf="!results.length && !isLoading">
+    <mat-icon class="mat-24 empty-list">list_alt_add</mat-icon>
+    <span>No data...</span>
+  </div>
+  </ng-container>
+
+  <div *ngIf="isLoading" class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+
+

@@ -1,0 +1,74 @@
+:host {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+
+  .input-wrapper {
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+  }
+
+  .spinner-container {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100% mat-spinner {
+      width: 50px;
+      height: 50px;
+      color: #3f51b5;
+    }
+  }
+
+  cdk-virtual-scroll-viewport {
+    height: 100%;
+    width: 80%;
+
+    div {
+      &.result-item {
+        padding: 1rem 1rem 1rem .5rem;
+        font-size: 16px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+      }
+    }
+
+    span {
+      &.book-title {
+        font-weight: 500;
+      }
+
+      &.authors {
+        font-weight: 300;
+        font-style: italic;
+      }
+    }
+  }
+
+  .no-results-container {
+    position: absolute;
+    top: 40%;
+    font-size: 22px;
+    color: #b0b0b0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .empty-list {
+      font-size: 90px;
+      height: 100px;
+      width: 100px;
+      font-weight: 300;
+    }
+  }
+}
